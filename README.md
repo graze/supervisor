@@ -50,6 +50,9 @@ anything you like with the handlers:
  - Retry the process
  - Email your developers or infrastructure team
  - Requeue the job in some fancy queuing product
+ - Alert your error logging service
+ - Start a different script
+ - Stop other related scripts
  - Simply throw an exception
 
 ```php
