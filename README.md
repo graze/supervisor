@@ -32,18 +32,13 @@ will stop watching the process and you can continue on your business. *But what
 about processes that fall flat on their face?*
 
 ```text
-PHP Fatal error:  Uncaught exception 'Graze\Supervisor\Exception\TerminatedProcessException' with message 'The process was unexpectedly terminated
-[process] /usr/bin/php whileTrueSleep.php'
+Uncaught exception 'Graze\Supervisor\Exception\TerminatedProcessException' with message
+The process was unexpectedly terminated
+[process] /usr/bin/php whileTrueSleep.php
 [code]    143
 [text]    Termination (request to terminate)
 [stderr]  Terminated
 [stdout]
-' in /srv/src/ProcessSupervisor.php:76
-Stack trace:
-#0 /srv/src/ProcessSupervisor.php(118): Graze\Supervisor\ProcessSupervisor->ping(true)
-#1 /srv/test.php(13): Graze\Supervisor\ProcessSupervisor->supervise()
-#2 {main}
-  thrown in /srv/src/ProcessSupervisor.php on line 76
 ```
 
 Now we've gone from one script failing, to two scripts failing, but how does
