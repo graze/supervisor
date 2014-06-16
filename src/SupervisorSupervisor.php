@@ -1,0 +1,178 @@
+<?php
+/*
+ * This file is part of Graze Supervisor
+ *
+ * Copyright (c) 2014 Nature Delivered Ltd. <http://graze.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @see  http://github.com/graze/supervisor/blob/master/LICENSE
+ * @link http://github.com/graze/supervisor
+ */
+namespace Graze\Supervisor;
+
+use Exception;
+use Graze\Supervisor\Handler\ExceptionHandler;
+use Graze\Supervisor\Handler\HandlerInterface;
+use Graze\Supervisor\Handler\UnexpectedTerminationHandler;
+
+class SupervisorSupervisor implements SupervisorInterface
+{
+    public $stderr;
+    public $stdout;
+
+    protected $handler;
+    protected $retries = 0;
+    protected $supervisors;
+
+    /**
+     * @param SupervisorInterface[] $supervisors
+     * @param HandlerInterface $handler
+     */
+    public function __construct(array $supervisors, HandlerInterface $handler = null)
+    {
+        $this->handler = $handler ?: $this->getDefaultHandler();
+        $this->supervisors = array_filter($supervisors, function (SupervisorInterface $supervisor) {
+            return true;
+        });
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isRunning()
+    {
+        foreach ($this->supervisors as $supervisor) {
+            if ($supervisor->isRunning()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSuccessful()
+    {
+        foreach ($this->supervisors as $supervisor) {
+            if (!$supervisor->isSuccessful()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isTerminated()
+    {
+        foreach ($this->supervisors as $supervisor) {
+            if (!$supervisor->isTerminated()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function ping()
+    {
+        $out = false;
+
+        foreach ($this->supervisors as $supervisor) {
+            try {
+                if (!$supervisor->ping()) {
+                    $this->updateOutput();
+                    $this->handler->handlePass($this->retries, $this);
+                } else {
+                    $out = true;
+                }
+            } catch (Exception $exception) {
+                $this->updateOutput();
+                $this->handler->handleFail($this->retries, $this, $exception);
+            }
+        }
+
+        return $out;
+    }
+
+    /**
+     * @param callable $fn
+     */
+    public function restart(callable $fn = null)
+    {
+        $this->reset($this->retries + 1);
+
+        foreach ($this->supervisors as $supervisor) {
+            $supervisor->restart($fn);
+        }
+    }
+
+    /**
+     * @param callable $fn
+     */
+    public function start(callable $fn = null)
+    {
+        $this->reset(0);
+
+        foreach ($this->supervisors as $supervisor) {
+            $supervisor->start($fn);
+        }
+    }
+
+    /**
+     * @param integer $signal
+     */
+    public function stop($signal = null)
+    {
+        foreach ($this->supervisors as $supervisor) {
+            $supervisor->stop($signal);
+        }
+    }
+
+    /**
+     * @param float $delay
+     */
+    public function supervise($delay = 0.001)
+    {
+        $microdelay = $delay * 1000000;
+
+        while ($this->ping(true)) {
+            usleep($microdelay);
+        }
+    }
+
+    /**
+     * @return HandlerInterface
+     */
+    protected function getDefaultHandler()
+    {
+        return new ExceptionHandler(new UnexpectedTerminationHandler());
+    }
+
+    /**
+     * @param integer $retries
+     */
+    protected function reset($retries = 0)
+    {
+        $this->retries = $retries;
+        $this->stderr  = null;
+        $this->sttout  = null;
+    }
+
+    protected function updateOutput()
+    {
+        foreach ($this->supervisors as $supervisor) {
+            $this->stderr .= $supervisor->stderr . PHP_EOL;
+            $this->stdout .= $supervisor->stdout . PHP_EOL;
+        }
+    }
+}
