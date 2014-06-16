@@ -1,0 +1,38 @@
+{
+    "name": "graze/supervisor",
+    "description": "Process supervisor for PHP",
+    "homepage": "https://github.com/graze/supervisor",
+    "version": "1.0.0-dev",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "child",
+        "daemon",
+        "multiprocess",
+        "multi-process",
+        "multiprocessing",
+        "process",
+        "processing",
+        "supervisor"
+    ],
+    "authors": [
+        {
+            "name": "Graze tech team",
+            "homepage": "https://github.com/graze/supervisor/graphs/contributors"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Graze\\Supervisor\\": "src"
+        }
+    },
+    "require": {
+        "php": ">=5.4",
+        "symfony/process": "~2.5"
+    },
+    "require-dev": {
+        "adlawson/timezone": "~1.0",
+        "mockery/mockery": "~0.9",
+        "phpunit/phpunit": "~4.0"
+    }
+}
