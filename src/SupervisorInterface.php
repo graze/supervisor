@@ -17,21 +17,6 @@ interface SupervisorInterface
     /**
      * @return boolean
      */
-    public function isRunning();
-
-    /**
-     * @return boolean
-     */
-    public function isSuccessful();
-
-    /**
-     * @return boolean
-     */
-    public function isTerminated();
-
-    /**
-     * @return boolean
-     */
     public function ping();
 
     /**

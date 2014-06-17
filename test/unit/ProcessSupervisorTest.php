@@ -23,27 +23,6 @@ class ProcessSupervisorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Graze\Supervisor\SupervisorInterface', $this->sup);
     }
 
-    public function testIsRunning()
-    {
-        $this->process->shouldReceive('isRunning')->once()->withNoArgs()->andReturn(true);
-
-        $this->assertTrue($this->sup->isRunning());
-    }
-
-    public function testIsSuccessful()
-    {
-        $this->process->shouldReceive('isSuccessful')->once()->withNoArgs()->andReturn(true);
-
-        $this->assertTrue($this->sup->isSuccessful());
-    }
-
-    public function testIsTerminated()
-    {
-        $this->process->shouldReceive('isTerminated')->once()->withNoArgs()->andReturn(true);
-
-        $this->assertTrue($this->sup->isTerminated());
-    }
-
     public function testUnterminatedPing()
     {
         $this->process->shouldReceive('isTerminated')->once()->withNoArgs()->andReturn(false);
@@ -99,8 +78,8 @@ class ProcessSupervisorTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->sup->stdout);
 
         // Check wrapped process is the new one
-        $process->shouldReceive('isRunning')->once()->withNoArgs()->andReturn(true);
-        $this->sup->isRunning();
+        $process->shouldReceive('isTerminated')->once()->withNoArgs()->andReturn(false);
+        $this->sup->ping();
     }
 
     public function testStart()

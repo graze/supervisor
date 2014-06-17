@@ -40,37 +40,13 @@ class ProcessSupervisor implements SupervisorInterface
     /**
      * @return boolean
      */
-    public function isRunning()
-    {
-        return $this->process->isRunning();
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isSuccessful()
-    {
-        return $this->process->isSuccessful();
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isTerminated()
-    {
-        return $this->process->isTerminated();
-    }
-
-    /**
-     * @return boolean
-     */
     public function ping()
     {
-        if ($this->isTerminated()) {
+        if ($this->process->isTerminated()) {
             $this->stderr = $this->process->getErrorOutput();
             $this->stdout = $this->process->getOutput();
 
-            if ($this->isSuccessful()) {
+            if ($this->process->isSuccessful()) {
                 $this->handler->handlePass($this->retries, $this);
             } else {
                 $this->handler->handleFail($this->retries, $this, new TerminatedProcessException($this->process));

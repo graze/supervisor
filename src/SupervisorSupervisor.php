@@ -41,48 +41,6 @@ class SupervisorSupervisor implements SupervisorInterface
     /**
      * @return boolean
      */
-    public function isRunning()
-    {
-        foreach ($this->supervisors as $supervisor) {
-            if ($supervisor->isRunning()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isSuccessful()
-    {
-        foreach ($this->supervisors as $supervisor) {
-            if (!$supervisor->isSuccessful()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isTerminated()
-    {
-        foreach ($this->supervisors as $supervisor) {
-            if (!$supervisor->isTerminated()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * @return boolean
-     */
     public function ping()
     {
         $out = false;
