@@ -2,6 +2,7 @@
 namespace Graze\Supervisor\Exception;
 
 use Exception;
+use Graze\Supervisor\Exception\TerminatedProcessException;
 use Mockery as m;
 
 class TerminatedProcessExceptionTest extends \PHPUnit_Framework_TestCase
@@ -13,13 +14,20 @@ class TerminatedProcessExceptionTest extends \PHPUnit_Framework_TestCase
 
     public function testInterface()
     {
-        $exception = m::mock('Graze\Supervisor\Exception\TerminatedProcessException');
+
+        $this->process->shouldReceive('getCommandLine')->once()->withNoArgs()->andReturn('foo');
+        $this->process->shouldReceive('getExitCode')->once()->withNoArgs()->andReturn(1);
+        $this->process->shouldReceive('getExitCodeText')->once()->withNoArgs()->andReturn('bar');
+        $this->process->shouldReceive('getOutput')->once()->withNoArgs()->andReturn('baz');
+        $this->process->shouldReceive('getErrorOutput')->once()->withNoArgs()->andReturn('bam');
+
+        $exception = new TerminatedProcessException($this->process);
 
         $this->assertInstanceOf('Graze\Supervisor\Exception\ExceptionInterface', $exception);
         $this->assertInstanceOf('Graze\Supervisor\Exception\ProcessExceptionInterface', $exception);
     }
 
-    public function testConstruct()
+    public function testGetProcess()
     {
         $this->process->shouldReceive('getCommandLine')->once()->withNoArgs()->andReturn('foo');
         $this->process->shouldReceive('getExitCode')->once()->withNoArgs()->andReturn(1);

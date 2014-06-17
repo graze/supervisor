@@ -2,6 +2,7 @@
 namespace Graze\Supervisor\Exception;
 
 use Exception;
+use Graze\Supervisor\Exception\UnexpectedTerminationException;
 use Mockery as m;
 
 class UnexpectedTerminationExceptionTest extends \PHPUnit_Framework_TestCase
@@ -13,13 +14,13 @@ class UnexpectedTerminationExceptionTest extends \PHPUnit_Framework_TestCase
 
     public function testInterface()
     {
-        $exception = m::mock('Graze\Supervisor\Exception\UnexpectedTerminationException');
+        $exception = new UnexpectedTerminationException($this->sup);
 
         $this->assertInstanceOf('Graze\Supervisor\Exception\ExceptionInterface', $exception);
         $this->assertInstanceOf('Graze\Supervisor\Exception\SupervisorExceptionInterface', $exception);
     }
 
-    public function testConstruct()
+    public function testGetSupervisor()
     {
         $exception = new UnexpectedTerminationException($this->sup);
 
