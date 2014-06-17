@@ -36,21 +36,25 @@ interface SupervisorInterface
 
     /**
      * @param callable $fn
+     * @return SupervisorInterface
      */
     public function restart(callable $fn = null);
 
     /**
      * @param callable $fn
+     * @return SupervisorInterface
      */
     public function start(callable $fn = null);
 
     /**
      * @param integer $signal
+     * @return SupervisorInterface
      */
     public function stop($signal = null);
 
     /**
      * @param float $delay
+     * @return SupervisorInterface
      */
     public function supervise($delay = 0.001);
 }

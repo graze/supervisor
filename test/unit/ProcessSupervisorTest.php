@@ -92,7 +92,8 @@ class ProcessSupervisorTest extends \PHPUnit_Framework_TestCase
 
         $process = clone $this->process;
         $this->process->shouldReceive('restart')->once()->with($fn)->andReturn($process);
-        $this->sup->restart($fn);
+
+        $this->assertSame($this->sup, $this->sup->restart($fn));
 
         $this->assertNull($this->sup->stderr);
         $this->assertNull($this->sup->stdout);
@@ -107,7 +108,8 @@ class ProcessSupervisorTest extends \PHPUnit_Framework_TestCase
         $fn = function(){};
 
         $this->process->shouldReceive('start')->once()->with($fn);
-        $this->sup->start($fn);
+
+        $this->assertSame($this->sup, $this->sup->start($fn));
 
         $this->assertNull($this->sup->stderr);
         $this->assertNull($this->sup->stdout);
@@ -117,6 +119,7 @@ class ProcessSupervisorTest extends \PHPUnit_Framework_TestCase
     {
         $sig = 'foo';
         $this->process->shouldReceive('stop')->once()->with(0, $sig);
-        $this->sup->stop($sig);
+
+        $this->assertSame($this->sup, $this->sup->stop($sig));
     }
 }

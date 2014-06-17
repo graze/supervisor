@@ -154,7 +154,8 @@ class SupervisorSupervisorTest extends \PHPUnit_Framework_TestCase
         $this->supA->shouldReceive('restart')->once()->with($fn);
         $this->supB->shouldReceive('restart')->once()->with($fn);
         $this->supC->shouldReceive('restart')->once()->with($fn);
-        $this->sup->restart($fn);
+
+        $this->assertSame($this->sup, $this->sup->restart($fn));
 
         $this->assertNull($this->sup->stderr);
         $this->assertNull($this->sup->stdout);
@@ -167,7 +168,8 @@ class SupervisorSupervisorTest extends \PHPUnit_Framework_TestCase
         $this->supA->shouldReceive('start')->once()->with($fn);
         $this->supB->shouldReceive('start')->once()->with($fn);
         $this->supC->shouldReceive('start')->once()->with($fn);
-        $this->sup->start($fn);
+
+        $this->assertSame($this->sup, $this->sup->start($fn));
 
         $this->assertNull($this->sup->stderr);
         $this->assertNull($this->sup->stdout);
@@ -179,6 +181,7 @@ class SupervisorSupervisorTest extends \PHPUnit_Framework_TestCase
         $this->supA->shouldReceive('stop')->once()->with($sig);
         $this->supB->shouldReceive('stop')->once()->with($sig);
         $this->supC->shouldReceive('stop')->once()->with($sig);
-        $this->sup->stop($sig);
+
+        $this->assertSame($this->sup, $this->sup->stop($sig));
     }
 }

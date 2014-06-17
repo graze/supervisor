@@ -84,32 +84,42 @@ class ProcessSupervisor implements SupervisorInterface
 
     /**
      * @param callable $fn
+     * @return SupervisorInterface
      */
     public function restart(callable $fn = null)
     {
         $this->retries += 1;
         $this->process = $this->process->restart($fn);
+
+        return $this;
     }
 
     /**
      * @param callable $fn
+     * @return SupervisorInterface
      */
     public function start(callable $fn = null)
     {
         $this->retries = 0;
         $this->process->start($fn);
+
+        return $this;
     }
 
     /**
      * @param integer $signal
+     * @return SupervisorInterface
      */
     public function stop($signal = null)
     {
         $this->process->stop(0, $signal);
+
+        return $this;
     }
 
     /**
      * @param float $delay
+     * @return SupervisorInterface
      */
     public function supervise($delay = 0.001)
     {
@@ -118,6 +128,8 @@ class ProcessSupervisor implements SupervisorInterface
         while ($this->ping()) {
             usleep($microdelay);
         }
+
+        return $this;
     }
 
     /**

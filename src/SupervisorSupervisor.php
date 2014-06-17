@@ -106,6 +106,7 @@ class SupervisorSupervisor implements SupervisorInterface
 
     /**
      * @param callable $fn
+     * @return SupervisorInterface
      */
     public function restart(callable $fn = null)
     {
@@ -114,10 +115,13 @@ class SupervisorSupervisor implements SupervisorInterface
         foreach ($this->supervisors as $supervisor) {
             $supervisor->restart($fn);
         }
+
+        return $this;
     }
 
     /**
      * @param callable $fn
+     * @return SupervisorInterface
      */
     public function start(callable $fn = null)
     {
@@ -126,20 +130,26 @@ class SupervisorSupervisor implements SupervisorInterface
         foreach ($this->supervisors as $supervisor) {
             $supervisor->start($fn);
         }
+
+        return $this;
     }
 
     /**
      * @param integer $signal
+     * @return SupervisorInterface
      */
     public function stop($signal = null)
     {
         foreach ($this->supervisors as $supervisor) {
             $supervisor->stop($signal);
         }
+
+        return $this;
     }
 
     /**
      * @param float $delay
+     * @return SupervisorInterface
      */
     public function supervise($delay = 0.001)
     {
@@ -148,6 +158,8 @@ class SupervisorSupervisor implements SupervisorInterface
         while ($this->ping()) {
             usleep($microdelay);
         }
+
+        return $this;
     }
 
     /**
