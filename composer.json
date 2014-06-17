@@ -2,7 +2,6 @@
     "name": "graze/supervisor",
     "description": "Process supervisor for PHP",
     "homepage": "https://github.com/graze/supervisor",
-    "version": "1.0.0-dev",
     "license": "MIT",
     "type": "library",
     "keywords": [
