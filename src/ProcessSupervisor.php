@@ -115,7 +115,7 @@ class ProcessSupervisor implements SupervisorInterface
     {
         $microdelay = $delay * 100000;
 
-        while ($this->ping(true)) {
+        while ($this->ping()) {
             usleep($microdelay);
         }
     }

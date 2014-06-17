@@ -145,7 +145,7 @@ class SupervisorSupervisor implements SupervisorInterface
     {
         $microdelay = $delay * 1000000;
 
-        while ($this->ping(true)) {
+        while ($this->ping()) {
             usleep($microdelay);
         }
     }
