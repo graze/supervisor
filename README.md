@@ -2,7 +2,7 @@
 
 <img src="http://media.giphy.com/media/dbtDDSvWErdf2/giphy.gif" alt="Supervisor" align="right" width=310/>
 
-**Version:** `1.0.x`<br/>
+**Version:** `1.1.x`<br/>
 **Master build:** [![Master branch build status][travis-master]][travis]
 
 This library implements CLI process supervisors and aggregate supervisor
@@ -11,7 +11,7 @@ It can be installed in whichever way you prefer, but we recommend [Composer][pac
 ```json
 {
     "require": {
-        "graze/supervisor": "1.0.*"
+        "graze/supervisor": "1.1.*"
     }
 }
 ```
