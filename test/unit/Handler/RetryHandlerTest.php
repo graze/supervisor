@@ -29,41 +29,41 @@ class RetryHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $this->sup->shouldReceive('restart')->once()->withNoArgs();
 
-        $this->handler->handleFail(0, $this->sup);
+        $this->assertTrue($this->handler->handleFail(0, $this->sup));
     }
 
     public function testHandleFailMaxTime()
     {
         $this->sup->shouldReceive('restart')->once()->withNoArgs();
 
-        $this->handler->handleFail($this->max, $this->sup);
+        $this->assertTrue($this->handler->handleFail($this->max, $this->sup));
     }
 
     public function testHandleFailMoreThanMaxTimes()
     {
-        $this->next->shouldReceive('handleFail')->once()->with(($this->max + 1), $this->sup, null);
+        $this->next->shouldReceive('handleFail')->once()->with(($this->max + 1), $this->sup, null)->andReturn(false);
 
-        $this->handler->handleFail(($this->max + 1), $this->sup);
+        $this->assertFalse($this->handler->handleFail(($this->max + 1), $this->sup));
     }
 
     public function testHandlePassFirstTime()
     {
-        $this->next->shouldReceive('handlePass')->once()->with(0, $this->sup);
+        $this->next->shouldReceive('handlePass')->once()->with(0, $this->sup)->andReturn(false);
 
-        $this->handler->handlePass(0, $this->sup);
+        $this->assertFalse($this->handler->handlePass(0, $this->sup));
     }
 
     public function testHandlePassMaxTime()
     {
-        $this->next->shouldReceive('handlePass')->once()->with($this->max, $this->sup);
+        $this->next->shouldReceive('handlePass')->once()->with($this->max, $this->sup)->andReturn(false);
 
-        $this->handler->handlePass($this->max, $this->sup);
+        $this->assertFalse($this->handler->handlePass($this->max, $this->sup));
     }
 
     public function testHandlePassMoreThanMaxTimes()
     {
-        $this->next->shouldReceive('handlePass')->once()->with(($this->max + 1), $this->sup);
+        $this->next->shouldReceive('handlePass')->once()->with(($this->max + 1), $this->sup)->andReturn(false);
 
-        $this->handler->handlePass(($this->max + 1), $this->sup);
+        $this->assertFalse($this->handler->handlePass(($this->max + 1), $this->sup));
     }
 }

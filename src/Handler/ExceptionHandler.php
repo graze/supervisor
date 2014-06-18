@@ -29,7 +29,7 @@ class ExceptionHandler extends DecoratedHandler
             throw $exception;
         }
 
-        $this->handleNextFail($retries, $supervisor, $exception);
+        return $this->handleNextFail($retries, $supervisor, $exception);
     }
 
     /**
@@ -38,6 +38,6 @@ class ExceptionHandler extends DecoratedHandler
      */
     public function handlePass($retries, SupervisorInterface $supervisor)
     {
-        $this->handleNextPass($retries, $supervisor);
+        return $this->handleNextPass($retries, $supervisor);
     }
 }

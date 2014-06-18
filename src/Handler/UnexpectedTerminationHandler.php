@@ -34,6 +34,6 @@ class UnexpectedTerminationHandler extends DecoratedHandler
      */
     public function handlePass($retries, SupervisorInterface $supervisor)
     {
-        $this->handleNextPass($retries, $supervisor);
+        return $this->handleNextPass($retries, $supervisor);
     }
 }

@@ -49,14 +49,16 @@ class SupervisorSupervisor implements SupervisorInterface
             try {
                 if (!$supervisor->ping()) {
                     $this->updateOutput();
-                    $this->handler->handlePass($this->retries, $this);
+                    $result = $this->handler->handlePass($this->retries, $this);
                 } else {
-                    $out = true;
+                    $result = true;
                 }
             } catch (Exception $exception) {
                 $this->updateOutput();
-                $this->handler->handleFail($this->retries, $this, $exception);
+                $result = $this->handler->handleFail($this->retries, $this, $exception);
             }
+
+            $out = $result ? true : $out;
         }
 
         return $out;

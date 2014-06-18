@@ -47,12 +47,10 @@ class ProcessSupervisor implements SupervisorInterface
             $this->stdout = $this->process->getOutput();
 
             if ($this->process->isSuccessful()) {
-                $this->handler->handlePass($this->retries, $this);
-            } else {
-                $this->handler->handleFail($this->retries, $this, new TerminatedProcessException($this->process));
+                return (boolean) $this->handler->handlePass($this->retries, $this);
             }
 
-            return false;
+            return (boolean) $this->handler->handleFail($this->retries, $this, new TerminatedProcessException($this->process));
         }
 
         return true;

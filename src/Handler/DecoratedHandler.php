@@ -34,22 +34,28 @@ abstract class DecoratedHandler implements HandlerInterface
      * @param integer $retries
      * @param SupervisorInterface $supervisor
      * @param Exception $exception
+     * @return boolean
      */
     protected function handleNextFail($retries, SupervisorInterface $supervisor, Exception $exception = null)
     {
         if ($this->next) {
-            $this->next->handleFail($retries, $supervisor, $exception);
+            return $this->next->handleFail($retries, $supervisor, $exception);
         }
+
+        return false;
     }
 
     /**
      * @param integer $retries
      * @param SupervisorInterface $supervisor
+     * @return boolean
      */
     protected function handleNextPass($retries, SupervisorInterface $supervisor)
     {
         if ($this->next) {
-            $this->next->handlePass($retries, $supervisor);
+            return $this->next->handlePass($retries, $supervisor);
         }
+
+        return false;
     }
 }

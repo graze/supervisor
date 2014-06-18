@@ -34,15 +34,15 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testHandleFailWithoutException()
     {
-        $this->next->shouldReceive('handleFail')->once()->with(0, $this->sup, null);
+        $this->next->shouldReceive('handleFail')->once()->with(0, $this->sup, null)->andReturn(false);
 
-        $this->handler->handleFail(0, $this->sup);
+        $this->assertFalse($this->handler->handleFail(0, $this->sup));
     }
 
     public function testHandlePass()
     {
-        $this->next->shouldReceive('handlePass')->once()->with(0, $this->sup);
+        $this->next->shouldReceive('handlePass')->once()->with(0, $this->sup)->andReturn(false);
 
-        $this->handler->handlePass(0, $this->sup);
+        $this->assertFalse($this->handler->handlePass(0, $this->sup));
     }
 }

@@ -21,12 +21,14 @@ interface HandlerInterface
      * @param integer $retries
      * @param SupervisorInterface $supervisor
      * @param Exception $exception
+     * @return boolean
      */
     public function handleFail($retries, SupervisorInterface $supervisor, Exception $exception = null);
 
     /**
      * @param integer $retries
      * @param SupervisorInterface $supervisor
+     * @return boolean
      */
     public function handlePass($retries, SupervisorInterface $supervisor);
 }

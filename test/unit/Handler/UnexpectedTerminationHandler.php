@@ -41,8 +41,8 @@ class UnexpectedTerminationHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testHandlePass()
     {
-        $this->next->shouldReceive('handlePass')->once()->with(0, $this->sup);
+        $this->next->shouldReceive('handlePass')->once()->with(0, $this->sup)->andReturn(false);
 
-        $this->handler->handlePass(0, $this->sup);
+        $this->assertFalse($this->handler->handlePass(0, $this->sup));
     }
 }

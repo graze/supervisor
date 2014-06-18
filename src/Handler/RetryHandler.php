@@ -40,9 +40,10 @@ class RetryHandler extends DecoratedHandler
     {
         if ($retries <= $this->max) {
             $supervisor->restart();
-        } else {
-            $this->handleNextFail($retries, $supervisor, $exception);
+            return true;
         }
+
+        return $this->handleNextFail($retries, $supervisor, $exception);
     }
 
     /**
@@ -51,6 +52,6 @@ class RetryHandler extends DecoratedHandler
      */
     public function handlePass($retries, SupervisorInterface $supervisor)
     {
-        $this->handleNextPass($retries, $supervisor);
+        return $this->handleNextPass($retries, $supervisor);
     }
 }
