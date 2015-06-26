@@ -68,7 +68,8 @@ class SupervisorSupervisorTest extends \PHPUnit_Framework_TestCase
 
     public function testRestart()
     {
-        $fn = function(){};
+        $fn = function () {
+        };
 
         $this->supA->shouldReceive('restart')->once()->with($fn);
         $this->supB->shouldReceive('restart')->once()->with($fn);
@@ -82,7 +83,8 @@ class SupervisorSupervisorTest extends \PHPUnit_Framework_TestCase
 
     public function testStart()
     {
-        $fn = function(){};
+        $fn = function () {
+        };
 
         $this->supA->shouldReceive('start')->once()->with($fn);
         $this->supB->shouldReceive('start')->once()->with($fn);

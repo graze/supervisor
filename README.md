@@ -1,20 +1,29 @@
 # Supervisor
 
-<img src="http://media.giphy.com/media/dbtDDSvWErdf2/giphy.gif" alt="Supervisor" align="right" width=310/>
+<img src="https://media.giphy.com/media/dbtDDSvWErdf2/giphy.gif" alt="Supervisor" align="right" width=310 />
 
-**Version:** `1.1.x`<br/>
-**Master build:** [![Master branch build status][travis-master]][travis]
+[![Build Status][ico-build]][travis]
+[![Latest Version][ico-package]][package]
+[![PHP ~5.5][ico-engine]][lang]
+[![MIT Licensed][ico-license]][license]
 
-This library implements CLI process supervisors and aggregate supervisor
-supervisors in an attempt to limit damage done by failing scripts.
+This library implements CLI process supervisors and aggregate supervisor supervisors in an attempt to limit damage done by failing scripts.
+
 It can be installed in whichever way you prefer, but we recommend [Composer][packagist].
-```json
-{
-    "require": {
-        "graze/supervisor": "1.1.*"
-    }
-}
-```
+
+`$ composer require graze\supervisor`
+
+<!-- Links -->
+[travis]: https://travis-ci.org/graze/supervisor
+[lang]: https://secure.php.net
+[package]: https://packagist.org/packages/graze/supervisor
+[license]: https://github.com/graze/supervisor/blob/master/LICENSE
+
+<!-- Images -->
+[ico-license]: https://img.shields.io/packagist/l/graze/supervisor.svg
+[ico-package]: https://img.shields.io/packagist/v/graze/supervisor.svg
+[ico-build]: https://img.shields.io/travis/graze/supervisor/master.svg
+[ico-engine]: https://img.shields.io/badge/php-%3E%3D5.5-8892BF.svg
 
 ## Documentation
 ```php
@@ -197,31 +206,21 @@ something like **systemd** or **upstart** for that.
 
 
 ## Contributing
-Contributions are accepted via Pull Request, but passing unit tests must be
-included before it will be considered for merge.
+
+We accept contributions to the source via Pull Request, but passing unit tests
+must be included before it will be considered for merge.
+
 ```bash
 $ composer install
-$ vendor/bin/phpunit
+$ composer test
 ```
 
-If you have [Vagrant][vagrant] installed, you can build our dev environment to assist development.
-The repository will be mounted in `/srv`.
-```bash
-$ vagrant up
-$ vagrant ssh
+If you've found a bug, please include a failing test when you [create an issue][issue].
 
-Welcome to Ubuntu 12.04 LTS (GNU/Linux 3.2.0-23-generic x86_64)
-$ cd /srv
-```
+[issue]: https://github.com/graze/queue/issues/new
 
-### License
-The content of this library is released under the **MIT License** by
-**Nature Delivered Ltd.**.<br/> You can find a copy of this license in
-[`LICENSE`][license] or at http://opensource.org/licenses/mit.
+## License
 
-<!-- Links -->
-[travis]: https://travis-ci.org/graze/supervisor
-[travis-master]: https://travis-ci.org/graze/supervisor.png?branch=master
-[packagist]: https://packagist.org/packages/graze/supervisor
-[vagrant]: http://vagrantup.com
-[license]: /LICENSE
+The content of this library is released under the **MIT License** by **Nature Delivered Ltd.**.
+
+You can find a copy of this license in [`LICENSE`][license] or at http://opensource.org/licenses/mit.

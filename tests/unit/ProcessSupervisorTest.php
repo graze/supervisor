@@ -58,7 +58,10 @@ class ProcessSupervisorTest extends \PHPUnit_Framework_TestCase
         $this->process->shouldReceive('getCommandLine')->once()->withNoArgs()->andReturn('cli');
         $this->process->shouldReceive('getExitCode')->once()->withNoArgs()->andReturn(123);
         $this->process->shouldReceive('getExitCodeText')->once()->withNoArgs()->andReturn('baz');
-        $this->handler->shouldReceive('handleFail')->once()->with(0, $this->sup, m::type('Graze\Supervisor\Exception\TerminatedProcessException'));
+
+        $this->handler->shouldReceive('handleFail')
+                      ->once()
+                      ->with(0, $this->sup, m::type('Graze\Supervisor\Exception\TerminatedProcessException'));
 
         $this->assertFalse($this->sup->ping());
         $this->assertEquals($err, $this->sup->stderr);
@@ -67,7 +70,8 @@ class ProcessSupervisorTest extends \PHPUnit_Framework_TestCase
 
     public function testRestart()
     {
-        $fn = function(){};
+        $fn = function () {
+        };
 
         $process = clone $this->process;
         $this->process->shouldReceive('restart')->once()->with($fn)->andReturn($process);
@@ -84,7 +88,8 @@ class ProcessSupervisorTest extends \PHPUnit_Framework_TestCase
 
     public function testStart()
     {
-        $fn = function(){};
+        $fn = function () {
+        };
 
         $this->process->shouldReceive('start')->once()->with($fn);
 

@@ -1,5 +1,5 @@
-.report
-.vagrant
+.vagrant/
+build/
+vendor/
 composer.lock
 phpunit.xml
-vendor
