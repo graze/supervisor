@@ -15,7 +15,7 @@ class ProcessSupervisorTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        $this->process->shouldReceive('stop')->once()->withNoArgs();
+        $this->process->shouldReceive('stop');
     }
 
     public function testInterface()
