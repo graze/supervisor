@@ -11,7 +11,7 @@ This library implements CLI process supervisors and aggregate supervisor supervi
 
 It can be installed in whichever way you prefer, but we recommend [Composer][packagist].
 
-`$ composer require graze\supervisor`
+`$ composer require graze/supervisor`
 
 <!-- Links -->
 [travis]: https://travis-ci.org/graze/supervisor
