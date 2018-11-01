@@ -34,7 +34,7 @@
 
     "require": {
         "php": ">=5.5",
-        "symfony/process": "^2.5"
+        "symfony/process": "^2.5 | ^4.0"
     },
 
     "require-dev": {
