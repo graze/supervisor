@@ -33,7 +33,7 @@ class ProcessSupervisorTest extends TestCase
 
     public function testUnterminatedPing()
     {
-        $this->process->shouldReceive('isTerminated')->once()->withNoArgs()->andReturn(false);
+        $this->process->shouldReceive('isTerminated')->once()->andReturn(false);
 
         $this->assertTrue($this->sup->ping());
     }
@@ -43,10 +43,10 @@ class ProcessSupervisorTest extends TestCase
         $err = 'foo';
         $out = 'bar';
 
-        $this->process->shouldReceive('isTerminated')->once()->withNoArgs()->andReturn(true);
-        $this->process->shouldReceive('isSuccessful')->once()->withNoArgs()->andReturn(true);
-        $this->process->shouldReceive('getErrorOutput')->once()->withNoArgs()->andReturn($err);
-        $this->process->shouldReceive('getOutput')->once()->withNoArgs()->andReturn($out);
+        $this->process->shouldReceive('isTerminated')->once()->andReturn(true);
+        $this->process->shouldReceive('isSuccessful')->once()->andReturn(true);
+        $this->process->shouldReceive('getErrorOutput')->once()->andReturn($err);
+        $this->process->shouldReceive('getOutput')->once()->andReturn($out);
         $this->handler->shouldReceive('handlePass')->once()->with(0, $this->sup);
 
         $this->assertFalse($this->sup->ping());
@@ -59,13 +59,13 @@ class ProcessSupervisorTest extends TestCase
         $err = 'foo';
         $out = 'bar';
 
-        $this->process->shouldReceive('isTerminated')->once()->withNoArgs()->andReturn(true);
-        $this->process->shouldReceive('isSuccessful')->once()->withNoArgs()->andReturn(false);
-        $this->process->shouldReceive('getErrorOutput')->times(2)->withNoArgs()->andReturn($err);
-        $this->process->shouldReceive('getOutput')->times(2)->withNoArgs()->andReturn($out);
-        $this->process->shouldReceive('getCommandLine')->once()->withNoArgs()->andReturn('cli');
-        $this->process->shouldReceive('getExitCode')->once()->withNoArgs()->andReturn(123);
-        $this->process->shouldReceive('getExitCodeText')->once()->withNoArgs()->andReturn('baz');
+        $this->process->shouldReceive('isTerminated')->once()->andReturn(true);
+        $this->process->shouldReceive('isSuccessful')->once()->andReturn(false);
+        $this->process->shouldReceive('getErrorOutput')->times(2)->andReturn($err);
+        $this->process->shouldReceive('getOutput')->times(2)->andReturn($out);
+        $this->process->shouldReceive('getCommandLine')->once()->andReturn('cli');
+        $this->process->shouldReceive('getExitCode')->once()->andReturn(123);
+        $this->process->shouldReceive('getExitCodeText')->once()->andReturn('baz');
 
         $this->handler->shouldReceive('handleFail')
                       ->once()
@@ -90,7 +90,7 @@ class ProcessSupervisorTest extends TestCase
         $this->assertNull($this->sup->stdout);
 
         // Check wrapped process is the new one
-        $process->shouldReceive('isTerminated')->once()->withNoArgs()->andReturn(false);
+        $process->shouldReceive('isTerminated')->once()->andReturn(false);
         $this->sup->ping();
     }
 

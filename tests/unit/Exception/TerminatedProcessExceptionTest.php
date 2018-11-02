@@ -18,11 +18,11 @@ class TerminatedProcessExceptionTest extends TestCase
     public function testInterface()
     {
 
-        $this->process->shouldReceive('getCommandLine')->once()->withNoArgs()->andReturn('foo');
-        $this->process->shouldReceive('getExitCode')->once()->withNoArgs()->andReturn(1);
-        $this->process->shouldReceive('getExitCodeText')->once()->withNoArgs()->andReturn('bar');
-        $this->process->shouldReceive('getOutput')->once()->withNoArgs()->andReturn('baz');
-        $this->process->shouldReceive('getErrorOutput')->once()->withNoArgs()->andReturn('bam');
+        $this->process->shouldReceive('getCommandLine')->once()->andReturn('foo');
+        $this->process->shouldReceive('getExitCode')->once()->andReturn(1);
+        $this->process->shouldReceive('getExitCodeText')->once()->andReturn('bar');
+        $this->process->shouldReceive('getOutput')->once()->andReturn('baz');
+        $this->process->shouldReceive('getErrorOutput')->once()->andReturn('bam');
 
         $exception = new TerminatedProcessException($this->process);
 
@@ -32,11 +32,11 @@ class TerminatedProcessExceptionTest extends TestCase
 
     public function testGetProcess()
     {
-        $this->process->shouldReceive('getCommandLine')->once()->withNoArgs()->andReturn('foo');
-        $this->process->shouldReceive('getExitCode')->once()->withNoArgs()->andReturn(1);
-        $this->process->shouldReceive('getExitCodeText')->once()->withNoArgs()->andReturn('bar');
-        $this->process->shouldReceive('getOutput')->once()->withNoArgs()->andReturn('baz');
-        $this->process->shouldReceive('getErrorOutput')->once()->withNoArgs()->andReturn('bam');
+        $this->process->shouldReceive('getCommandLine')->once()->andReturn('foo');
+        $this->process->shouldReceive('getExitCode')->once()->andReturn(1);
+        $this->process->shouldReceive('getExitCodeText')->once()->andReturn('bar');
+        $this->process->shouldReceive('getOutput')->once()->andReturn('baz');
+        $this->process->shouldReceive('getErrorOutput')->once()->andReturn('bam');
 
         $exception = new TerminatedProcessException($this->process);
 
