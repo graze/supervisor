@@ -1,5 +1,2 @@
-.vagrant/
 build/
 vendor/
-composer.lock
-phpunit.xml

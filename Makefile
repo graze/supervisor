@@ -71,10 +71,10 @@ test-coverage: ## Run all tests and output coverage to the console.
 	${DOCKER_RUN} phpdbg7 -qrr vendor/bin/phpunit --coverage-text
 
 test-coverage-html: ## Run all tests and output coverage to html.
-	${DOCKER_RUN} phpdbg7 -qrr vendor/bin/phpunit --coverage-html=./tests/report/html
+	${DOCKER_RUN} phpdbg7 -qrr vendor/bin/phpunit --coverage-html=./build/coverage/html
 
 test-coverage-clover: ## Run all tests and output clover coverage to file.
-	${DOCKER_RUN} phpdbg7 -qrr vendor/bin/phpunit --coverage-clover=./tests/report/coverage.clover
+	${DOCKER_RUN} phpdbg7 -qrr vendor/bin/phpunit --coverage-clover=./build/coverage/coverage.clover
 
 # Help
 

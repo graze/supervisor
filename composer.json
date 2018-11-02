@@ -28,7 +28,12 @@
 
     "autoload": {
         "psr-4": {
-            "Graze\\Supervisor\\": "src",
+            "Graze\\Supervisor\\": "src"
+        }
+    },
+
+    "autoload-dev": {
+        "psr-4": {
             "Graze\\Supervisor\\Test\\": "tests/src"
         }
     },
