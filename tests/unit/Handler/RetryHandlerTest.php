@@ -37,14 +37,14 @@ class RetryHandlerTest extends TestCase
 
     public function testHandleFailFirstTime()
     {
-        $this->sup->shouldReceive('restart')->once()->withNoArgs();
+        $this->sup->shouldReceive('restart')->once();
 
         $this->assertTrue($this->handler->handleFail(0, $this->sup));
     }
 
     public function testHandleFailMaxTime()
     {
-        $this->sup->shouldReceive('restart')->once()->withNoArgs();
+        $this->sup->shouldReceive('restart')->once();
 
         $this->assertTrue($this->handler->handleFail($this->max, $this->sup));
     }
