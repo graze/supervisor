@@ -16,12 +16,13 @@ use Exception;
 use Graze\Supervisor\Exception\UnexpectedTerminationException;
 use Graze\Supervisor\SupervisorInterface;
 
-class RetryHandler extends DecoratedHandler
+class RetryHandler extends AbstractDecoratedHandler
 {
+    /** @var int */
     protected $max;
 
     /**
-     * @param integer $max
+     * @param int $max
      * @param HandlerInterface $handler
      */
     public function __construct($max, HandlerInterface $handler = null)
@@ -32,9 +33,11 @@ class RetryHandler extends DecoratedHandler
     }
 
     /**
-     * @param integer $retries
+     * @param int                 $retries
      * @param SupervisorInterface $supervisor
-     * @param Exception $exception
+     * @param Exception           $exception
+     *
+     * @return bool
      */
     public function handleFail($retries, SupervisorInterface $supervisor, Exception $exception = null)
     {
@@ -47,8 +50,10 @@ class RetryHandler extends DecoratedHandler
     }
 
     /**
-     * @param integer $retries
+     * @param int                 $retries
      * @param SupervisorInterface $supervisor
+     *
+     * @return bool
      */
     public function handlePass($retries, SupervisorInterface $supervisor)
     {

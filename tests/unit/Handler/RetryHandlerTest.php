@@ -1,11 +1,21 @@
 <?php
+
 namespace Graze\Supervisor\Handler;
 
-use Exception;
+use Graze\Supervisor\Test\TestCase;
 use Mockery as m;
 
-class RetryHandlerTest extends \PHPUnit_Framework_TestCase
+class RetryHandlerTest extends TestCase
 {
+    /** @var int */
+    private $max;
+    /** @var mixed */
+    private $next;
+    /** @var mixed */
+    private $sup;
+    /** @var RetryHandler */
+    private $handler;
+
     public function setUp()
     {
         $this->max = 3;
@@ -22,7 +32,7 @@ class RetryHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testDecorator()
     {
-        $this->assertInstanceOf('Graze\Supervisor\Handler\DecoratedHandler', $this->handler);
+        $this->assertInstanceOf('Graze\Supervisor\Handler\AbstractDecoratedHandler', $this->handler);
     }
 
     public function testHandleFailFirstTime()

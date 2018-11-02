@@ -15,7 +15,7 @@ namespace Graze\Supervisor;
 interface SupervisorInterface
 {
     /**
-     * @return boolean
+     * @return bool
      */
     public function ping();
 
@@ -32,7 +32,7 @@ interface SupervisorInterface
     public function start(callable $fn = null);
 
     /**
-     * @param integer $signal
+     * @param int $signal
      * @return SupervisorInterface
      */
     public function stop($signal = null);

@@ -1,12 +1,15 @@
 <?php
+
 namespace Graze\Supervisor\Exception;
 
-use Exception;
-use Graze\Supervisor\Exception\TerminatedProcessException;
+use Graze\Supervisor\Test\TestCase;
 use Mockery as m;
 
-class TerminatedProcessExceptionTest extends \PHPUnit_Framework_TestCase
+class TerminatedProcessExceptionTest extends TestCase
 {
+    /** @var mixed */
+    private $process;
+
     public function setUp()
     {
         $this->process = m::mock('Symfony\Component\Process\Process', ['stop' => null]);

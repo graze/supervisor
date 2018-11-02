@@ -25,7 +25,7 @@ class UnexpectedTerminationException extends RuntimeException implements Supervi
 
     /**
      * @param SupervisorInterface $supervisor
-     * @param integer $code
+     * @param int $code
      * @param Exception $previous
      */
     public function __construct(SupervisorInterface $supervisor, $code = 0, Exception $previous = null)

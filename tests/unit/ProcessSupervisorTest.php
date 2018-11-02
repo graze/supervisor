@@ -2,9 +2,17 @@
 namespace Graze\Supervisor;
 
 use Mockery as m;
+use Graze\Supervisor\Test\TestCase;
 
-class ProcessSupervisorTest extends \PHPUnit_Framework_TestCase
+class ProcessSupervisorTest extends TestCase
 {
+    /** @var mixed */
+    private $process;
+    /** @var mixed */
+    private $handler;
+    /** @var ProcessSupervisor */
+    private $sup;
+
     public function setUp()
     {
         $this->process = m::mock('Symfony\Component\Process\Process', ['stop' => null]);

@@ -3,9 +3,17 @@ namespace Graze\Supervisor\Handler;
 
 use Exception;
 use Mockery as m;
+use Graze\Supervisor\Test\TestCase;
 
-class UnexpectedTerminationHandlerTest extends \PHPUnit_Framework_TestCase
+class UnexpectedTerminationHandlerTest extends TestCase
 {
+    /** @var mixed */
+    private $next;
+    /** @var mixed */
+    private $sup;
+    /** @var UnexpectedTerminationHandler */
+    private $handler;
+
     public function setUp()
     {
         $this->next = m::mock('Graze\Supervisor\Handler\HandlerInterface');
@@ -21,21 +29,24 @@ class UnexpectedTerminationHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testDecorator()
     {
-        $this->assertInstanceOf('Graze\Supervisor\Handler\DecoratedHandler', $this->handler);
+        $this->assertInstanceOf('Graze\Supervisor\Handler\AbstractDecoratedHandler', $this->handler);
     }
 
+    /**
+     * @expectedException \Graze\Supervisor\Exception\UnexpectedTerminationException
+     */
     public function testHandleFailWithException()
     {
         $exception = new Exception('foo');
-        $this->setExpectedException('Graze\Supervisor\Exception\UnexpectedTerminationException');
 
         $this->handler->handleFail(0, $this->sup, $exception);
     }
 
+    /**
+     * @expectedException \Graze\Supervisor\Exception\UnexpectedTerminationException
+     */
     public function testHandleFailWithoutException()
     {
-        $this->setExpectedException('Graze\Supervisor\Exception\UnexpectedTerminationException');
-
         $this->handler->handleFail(0, $this->sup);
     }
 

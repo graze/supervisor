@@ -18,17 +18,17 @@ use Graze\Supervisor\SupervisorInterface;
 interface HandlerInterface
 {
     /**
-     * @param integer $retries
+     * @param int $retries
      * @param SupervisorInterface $supervisor
      * @param Exception $exception
-     * @return boolean
+     * @return bool
      */
     public function handleFail($retries, SupervisorInterface $supervisor, Exception $exception = null);
 
     /**
-     * @param integer $retries
+     * @param int $retries
      * @param SupervisorInterface $supervisor
-     * @return boolean
+     * @return bool
      */
     public function handlePass($retries, SupervisorInterface $supervisor);
 }

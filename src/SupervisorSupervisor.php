@@ -19,11 +19,16 @@ use Graze\Supervisor\Handler\UnexpectedTerminationHandler;
 
 class SupervisorSupervisor implements SupervisorInterface
 {
+    /** @var string */
     public $stderr;
+    /** @var string */
     public $stdout;
 
+    /** @var HandlerInterface */
     protected $handler;
+    /** @var int */
     protected $retries = 0;
+    /** @var SupervisorInterface[] */
     protected $supervisors;
 
     /**
@@ -39,7 +44,7 @@ class SupervisorSupervisor implements SupervisorInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function ping()
     {
@@ -95,7 +100,7 @@ class SupervisorSupervisor implements SupervisorInterface
     }
 
     /**
-     * @param integer $signal
+     * @param int $signal
      * @return SupervisorInterface
      */
     public function stop($signal = null)
@@ -131,7 +136,7 @@ class SupervisorSupervisor implements SupervisorInterface
     }
 
     /**
-     * @param integer $retries
+     * @param int $retries
      */
     protected function reset($retries = 0)
     {

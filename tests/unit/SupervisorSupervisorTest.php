@@ -2,10 +2,24 @@
 namespace Graze\Supervisor;
 
 use Exception;
+use Graze\Supervisor\Test\TestCase;
 use Mockery as m;
 
-class SupervisorSupervisorTest extends \PHPUnit_Framework_TestCase
+class SupervisorSupervisorTest extends TestCase
 {
+    /** @var mixed */
+    private $handler;
+    /** @var mixed */
+    private $supA;
+    /** @var mixed */
+    private $supB;
+    /** @var mixed */
+    private $supC;
+    /** @var mixed */
+    private $sups;
+    /** @var SupervisorSupervisor */
+    private $sup;
+
     public function setUp()
     {
         $this->handler = m::mock('Graze\Supervisor\Handler\HandlerInterface');

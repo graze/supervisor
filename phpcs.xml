@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<ruleset name="graze/standards">
+    <description>The graze PHP coding standard as defined in graze/standards.</description>
+    <rule ref="vendor/graze/standards/PHP/CodeSniffer/Graze/ruleset.xml" />
+
+    <rule ref="Squiz.Commenting.FunctionComment">
+        <!-- excluded because it can't be used for both php 5 and 7 -->
+        <exclude name="Squiz.Commenting.FunctionComment.ScalarTypeHintMissing" />
+    </rule>
+</ruleset>
