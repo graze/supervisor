@@ -20,11 +20,16 @@ use Symfony\Component\Process\Process;
 
 class ProcessSupervisor implements SupervisorInterface
 {
+    /** @var string */
     public $stderr;
+    /** @var string */
     public $stdout;
 
+    /** @var HandlerInterface */
     protected $handler;
+    /** @var Process */
     protected $process;
+    /** @var int */
     protected $retries = 0;
 
     /**
@@ -38,7 +43,7 @@ class ProcessSupervisor implements SupervisorInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function ping()
     {
@@ -85,7 +90,7 @@ class ProcessSupervisor implements SupervisorInterface
     }
 
     /**
-     * @param integer $signal
+     * @param int $signal
      * @return SupervisorInterface
      */
     public function stop($signal = null)
@@ -101,10 +106,10 @@ class ProcessSupervisor implements SupervisorInterface
      */
     public function supervise($delay = 0.001)
     {
-        $microdelay = $delay * 100000;
+        $microDelay = $delay * 100000;
 
         while ($this->ping()) {
-            usleep($microdelay);
+            usleep($microDelay);
         }
 
         return $this;

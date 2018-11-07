@@ -1,11 +1,20 @@
 <?php
+
 namespace Graze\Supervisor\Handler;
 
 use Exception;
+use Graze\Supervisor\Test\TestCase;
 use Mockery as m;
 
-class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
+class ExceptionHandlerTest extends TestCase
 {
+    /** @var mixed */
+    private $next;
+    /** @var mixed */
+    private $sup;
+    /** @var ExceptionHandler */
+    private $handler;
+
     public function setUp()
     {
         $this->next = m::mock('Graze\Supervisor\Handler\HandlerInterface');
@@ -21,13 +30,15 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testDecorator()
     {
-        $this->assertInstanceOf('Graze\Supervisor\Handler\DecoratedHandler', $this->handler);
+        $this->assertInstanceOf('Graze\Supervisor\Handler\AbstractDecoratedHandler', $this->handler);
     }
 
+    /**
+     * @expectedException \Exception
+     */
     public function testHandleFailWithException()
     {
         $exception = new Exception('foo');
-        $this->setExpectedException(get_class($exception));
 
         $this->handler->handleFail(0, $this->sup, $exception);
     }

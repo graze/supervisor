@@ -1,14 +1,34 @@
 language: php
 
-sudo: false
+dist: trusty
+
+## Cache composer bits
+cache:
+  directories:
+    - $HOME/.composer/cache/files
 
 php:
-  - 5.5
   - 5.6
   - 7.0
+  - 7.1
+  - 7.2
+  - nightly
 
-install:
-  - travis_retry composer install --no-interaction
+env:
+  - PREFER_LOWEST=--prefer-lowest
+  - PREFER_LOWEST=
+
+matrix:
+  allow_failures:
+    - php: nightly
+
+before_script:
+  - composer config platform.php $(php -r "echo PHP_VERSION;")
+  - travis_retry composer update --no-interaction --prefer-dist $PREFER_LOWEST
 
 script:
-  - composer test --quiet
+  - vendor/bin/phpcs -p --warning-severity=0 src/ tests/
+  - vendor/bin/phpunit --coverage-clover=./tests/report/coverage.clover
+
+after_script:
+  - test -f ./tests/report/coverage.clover && (wget https://scrutinizer-ci.com/ocular.phar; php ocular.phar code-coverage:upload --format=php-clover ./tests/report/coverage.clover)

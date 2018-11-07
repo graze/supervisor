@@ -1,12 +1,15 @@
 <?php
+
 namespace Graze\Supervisor\Exception;
 
-use Exception;
-use Graze\Supervisor\Exception\TerminatedProcessException;
+use Graze\Supervisor\Test\TestCase;
 use Mockery as m;
 
-class TerminatedProcessExceptionTest extends \PHPUnit_Framework_TestCase
+class TerminatedProcessExceptionTest extends TestCase
 {
+    /** @var mixed */
+    private $process;
+
     public function setUp()
     {
         $this->process = m::mock('Symfony\Component\Process\Process', ['stop' => null]);
@@ -15,11 +18,11 @@ class TerminatedProcessExceptionTest extends \PHPUnit_Framework_TestCase
     public function testInterface()
     {
 
-        $this->process->shouldReceive('getCommandLine')->once()->withNoArgs()->andReturn('foo');
-        $this->process->shouldReceive('getExitCode')->once()->withNoArgs()->andReturn(1);
-        $this->process->shouldReceive('getExitCodeText')->once()->withNoArgs()->andReturn('bar');
-        $this->process->shouldReceive('getOutput')->once()->withNoArgs()->andReturn('baz');
-        $this->process->shouldReceive('getErrorOutput')->once()->withNoArgs()->andReturn('bam');
+        $this->process->shouldReceive('getCommandLine')->once()->andReturn('foo');
+        $this->process->shouldReceive('getExitCode')->once()->andReturn(1);
+        $this->process->shouldReceive('getExitCodeText')->once()->andReturn('bar');
+        $this->process->shouldReceive('getOutput')->once()->andReturn('baz');
+        $this->process->shouldReceive('getErrorOutput')->once()->andReturn('bam');
 
         $exception = new TerminatedProcessException($this->process);
 
@@ -29,11 +32,11 @@ class TerminatedProcessExceptionTest extends \PHPUnit_Framework_TestCase
 
     public function testGetProcess()
     {
-        $this->process->shouldReceive('getCommandLine')->once()->withNoArgs()->andReturn('foo');
-        $this->process->shouldReceive('getExitCode')->once()->withNoArgs()->andReturn(1);
-        $this->process->shouldReceive('getExitCodeText')->once()->withNoArgs()->andReturn('bar');
-        $this->process->shouldReceive('getOutput')->once()->withNoArgs()->andReturn('baz');
-        $this->process->shouldReceive('getErrorOutput')->once()->withNoArgs()->andReturn('bam');
+        $this->process->shouldReceive('getCommandLine')->once()->andReturn('foo');
+        $this->process->shouldReceive('getExitCode')->once()->andReturn(1);
+        $this->process->shouldReceive('getExitCodeText')->once()->andReturn('bar');
+        $this->process->shouldReceive('getOutput')->once()->andReturn('baz');
+        $this->process->shouldReceive('getErrorOutput')->once()->andReturn('bam');
 
         $exception = new TerminatedProcessException($this->process);
 

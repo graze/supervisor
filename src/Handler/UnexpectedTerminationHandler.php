@@ -16,10 +16,10 @@ use Exception;
 use Graze\Supervisor\Exception\UnexpectedTerminationException;
 use Graze\Supervisor\SupervisorInterface;
 
-class UnexpectedTerminationHandler extends DecoratedHandler
+class UnexpectedTerminationHandler extends AbstractDecoratedHandler
 {
     /**
-     * @param integer $retries
+     * @param int $retries
      * @param SupervisorInterface $supervisor
      * @param Exception $exception
      */
@@ -29,8 +29,10 @@ class UnexpectedTerminationHandler extends DecoratedHandler
     }
 
     /**
-     * @param integer $retries
+     * @param int                 $retries
      * @param SupervisorInterface $supervisor
+     *
+     * @return bool
      */
     public function handlePass($retries, SupervisorInterface $supervisor)
     {

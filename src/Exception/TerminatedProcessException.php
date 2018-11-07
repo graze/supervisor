@@ -25,7 +25,7 @@ class TerminatedProcessException extends RuntimeException implements ProcessExce
 
     /**
      * @param Process $process
-     * @param integer $code
+     * @param int $code
      * @param Exception $previous
      */
     public function __construct(Process $process, $code = 0, Exception $previous = null)

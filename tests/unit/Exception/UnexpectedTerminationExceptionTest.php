@@ -1,12 +1,15 @@
 <?php
+
 namespace Graze\Supervisor\Exception;
 
-use Exception;
-use Graze\Supervisor\Exception\UnexpectedTerminationException;
+use Graze\Supervisor\Test\TestCase;
 use Mockery as m;
 
-class UnexpectedTerminationExceptionTest extends \PHPUnit_Framework_TestCase
+class UnexpectedTerminationExceptionTest extends TestCase
 {
+    /** @var mixed */
+    private $sup;
+
     public function setUp()
     {
         $this->sup = m::mock('Graze\Supervisor\SupervisorInterface');

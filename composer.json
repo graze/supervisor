@@ -32,16 +32,23 @@
         }
     },
 
+    "autoload-dev": {
+        "psr-4": {
+            "Graze\\Supervisor\\Test\\": "tests/src"
+        }
+    },
+
     "require": {
         "php": ">=5.5",
-        "symfony/process": "^2.5 | ^4.0"
+        "symfony/process": "^2.5 | ^3 | ^4"
     },
 
     "require-dev": {
-        "hamcrest/hamcrest-php": "^1.2",
-        "mockery/mockery": "^0.9",
-        "phpunit/phpunit": "^4.0",
-        "squizlabs/php_codesniffer": "^2.0"
+        "hamcrest/hamcrest-php": "^1.2 | ^2.0",
+        "mockery/mockery": "^0.9.9",
+        "phpunit/phpunit": "^4.8.36 | ^5.7.21 | ^6 | ^7",
+        "squizlabs/php_codesniffer": "^3.0",
+        "graze/standards": "^2.0"
     },
 
     "scripts": {
@@ -65,5 +72,10 @@
             "echo '+++ Running \\033[33mphpcbf\\033[0m against the PSR2 standard\n'",
             "vendor/bin/phpcbf --standard=PSR2 src/ tests/"
         ]
+    },
+    "config": {
+        "platform": {
+            "php": "7.2"
+        }
     }
 }

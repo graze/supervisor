@@ -211,13 +211,12 @@ We accept contributions to the source via Pull Request, but passing unit tests
 must be included before it will be considered for merge.
 
 ```bash
-$ composer install
-$ composer test
+make build test
 ```
 
 If you've found a bug, please include a failing test when you [create an issue][issue].
 
-[issue]: https://github.com/graze/queue/issues/new
+[issue]: https://github.com/graze/supervisor/issues/new
 
 ## License
 

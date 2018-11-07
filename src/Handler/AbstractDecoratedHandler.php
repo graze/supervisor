@@ -15,7 +15,7 @@ namespace Graze\Supervisor\Handler;
 use Exception;
 use Graze\Supervisor\SupervisorInterface;
 
-abstract class DecoratedHandler implements HandlerInterface
+abstract class AbstractDecoratedHandler implements HandlerInterface
 {
     /**
      * @var HandlerInterface
@@ -31,10 +31,10 @@ abstract class DecoratedHandler implements HandlerInterface
     }
 
     /**
-     * @param integer $retries
+     * @param int $retries
      * @param SupervisorInterface $supervisor
      * @param Exception $exception
-     * @return boolean
+     * @return bool
      */
     protected function handleNextFail($retries, SupervisorInterface $supervisor, Exception $exception = null)
     {
@@ -46,9 +46,9 @@ abstract class DecoratedHandler implements HandlerInterface
     }
 
     /**
-     * @param integer $retries
+     * @param int $retries
      * @param SupervisorInterface $supervisor
-     * @return boolean
+     * @return bool
      */
     protected function handleNextPass($retries, SupervisorInterface $supervisor)
     {

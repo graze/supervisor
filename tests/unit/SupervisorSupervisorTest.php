@@ -2,10 +2,24 @@
 namespace Graze\Supervisor;
 
 use Exception;
+use Graze\Supervisor\Test\TestCase;
 use Mockery as m;
 
-class SupervisorSupervisorTest extends \PHPUnit_Framework_TestCase
+class SupervisorSupervisorTest extends TestCase
 {
+    /** @var mixed */
+    private $handler;
+    /** @var mixed */
+    private $supA;
+    /** @var mixed */
+    private $supB;
+    /** @var mixed */
+    private $supC;
+    /** @var mixed */
+    private $sups;
+    /** @var SupervisorSupervisor */
+    private $sup;
+
     public function setUp()
     {
         $this->handler = m::mock('Graze\Supervisor\Handler\HandlerInterface');
@@ -24,18 +38,20 @@ class SupervisorSupervisorTest extends \PHPUnit_Framework_TestCase
 
     public function testUnterminatedPing()
     {
-        $this->supA->shouldReceive('ping')->once()->withNoArgs()->andReturn(true);
-        $this->supB->shouldReceive('ping')->once()->withNoArgs()->andReturn(true);
-        $this->supC->shouldReceive('ping')->once()->withNoArgs()->andReturn(true);
+        $this->supA->shouldReceive('ping')->once()->andReturn(true);
+        $this->supB->shouldReceive('ping')->once()->andReturn(true);
+        $this->supC->shouldReceive('ping')->once()->andReturn(true);
+
+        $this->handler->shouldReceive('handleFail');
 
         $this->assertTrue($this->sup->ping());
     }
 
     public function testPartiallyTerminatedPing()
     {
-        $this->supA->shouldReceive('ping')->once()->withNoArgs()->andReturn(true);
-        $this->supB->shouldReceive('ping')->once()->withNoArgs()->andReturn(false);
-        $this->supC->shouldReceive('ping')->once()->withNoArgs()->andReturn(true);
+        $this->supA->shouldReceive('ping')->once()->andReturn(true);
+        $this->supB->shouldReceive('ping')->once()->andReturn(false);
+        $this->supC->shouldReceive('ping')->once()->andReturn(true);
 
         $this->handler->shouldReceive('handlePass')->once()->with(0, $this->sup);
 
@@ -46,9 +62,9 @@ class SupervisorSupervisorTest extends \PHPUnit_Framework_TestCase
     {
         $exception = new Exception('foo');
 
-        $this->supA->shouldReceive('ping')->once()->withNoArgs()->andReturn(true);
-        $this->supB->shouldReceive('ping')->once()->withNoArgs()->andReturn(true);
-        $this->supC->shouldReceive('ping')->once()->withNoArgs()->andThrow($exception);
+        $this->supA->shouldReceive('ping')->once()->andReturn(true);
+        $this->supB->shouldReceive('ping')->once()->andReturn(true);
+        $this->supC->shouldReceive('ping')->once()->andThrow($exception);
 
         $this->handler->shouldReceive('handleFail')->once()->with(0, $this->sup, $exception);
 
@@ -57,9 +73,9 @@ class SupervisorSupervisorTest extends \PHPUnit_Framework_TestCase
 
     public function testFullyTerminatedPing()
     {
-        $this->supA->shouldReceive('ping')->once()->withNoArgs()->andReturn(false);
-        $this->supB->shouldReceive('ping')->once()->withNoArgs()->andReturn(false);
-        $this->supC->shouldReceive('ping')->once()->withNoArgs()->andReturn(false);
+        $this->supA->shouldReceive('ping')->once()->andReturn(false);
+        $this->supB->shouldReceive('ping')->once()->andReturn(false);
+        $this->supC->shouldReceive('ping')->once()->andReturn(false);
 
         $this->handler->shouldReceive('handlePass')->times(3)->with(0, $this->sup);
 
